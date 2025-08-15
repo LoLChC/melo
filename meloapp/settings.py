@@ -45,6 +45,9 @@ TEMPLATES = [{
     }
 }]
 
+CSRF_TRUSTED_ORIGINS = ['https://melo-yof2.onrender.com']  # HTTPS zorunlu!
+SECURE_SSL_REDIRECT = True  # HTTPS yönlendirme
+
 WSGI_APPLICATION = "meloapp.wsgi.application"
 
 DATABASES = {
