@@ -67,6 +67,11 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 NOTIFY_EMAIL = os.getenv("NOTIFY_EMAIL")
 
+print("EMAIL_HOST_USER:", repr(EMAIL_HOST_USER))
+print("EMAIL_HOST_PASSWORD:", repr(EMAIL_HOST_PASSWORD))
+print("NOTIFY_EMAIL:", repr(NOTIFY_EMAIL))
+
+
 
 # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 # EMAIL_HOST = "smtp.gmail.com"
