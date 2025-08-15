@@ -43,7 +43,7 @@ def vote(request):
                     f"Toplam Evet: {vote_count['yes']}, Toplam Hayır: {vote_count['no']}",
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[settings.NOTIFY_EMAIL],
-            fail_silently=True
+            fail_silently=False
         )
 
         return JsonResponse({"status": "success", "counts": vote_count})
