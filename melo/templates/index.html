@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>❤️ Aşk Sorusu ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary-color: #ff6b81;
+    --secondary-color: #ff4757;
+    --text-color: #2f3542;
+    --background-color: #ffc0cb; /* Pembe arka plan */
+}
+
+/* Genel stil */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Arka plan GIF container */
+.background-gifs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* GIF boyut ve animasyon */
+.background-gifs img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    animation: moveDown linear infinite;
+}
+
+@keyframes moveDown {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+}
+
+/* Ana içerik */
+.container {
+    position: relative;
+    z-index: 1;
+    background-color: var(--background-color);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Başlık */
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+}
+
+/* Butonlar */
+.buttons { display: flex; justify-content: center; gap: 15px; margin: 25px 0; }
+button {
+    font-size: 1.2rem;
+    padding: 12px 25px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#yes { background-color: var(--primary-color); color: white; }
+#yes:hover { background-color: var(--secondary-color); transform: scale(1.05); }
+#no { background-color: #dfe4ea; color: var(--text-color); }
+#no:hover { background-color: #ced6e0; }
+
+/* 5. tıklama mesajı */
+.fifth-click-message {
+    display: none;
+    font-size: 1.3rem;
+    color: var(--secondary-color);
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #ffecef;
+    border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+    h1 { font-size: 2rem; }
+    .container { padding: 20px; }
+    button { font-size: 1rem; padding: 10px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Arka plan GIF'ler -->
+<div class="background-gifs" id="backgroundGifs"></div>
+
+<!-- Ana içerik -->
+<div class="container">
+    <h1>Sevgilim olurmusun? ❤️</h1>
+
+    <div class="fifth-click-message" id="fifthClickMessage">
+        amina koyim
+    </div>
+
+    <div class="buttons" id="buttons">
+        <button id="yes">Evet ❤️</button>
+        <button id="no">Hayır 😿</button>
+    </div>
+</div>
+
+<script>
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+const buttons = document.getElementById('buttons');
+const fifthClickMessage = document.getElementById('fifthClickMessage');
+const backgroundGifs = document.getElementById('backgroundGifs');
+let noClickCount = 0;
+
+// Arka plan GIF’leri doldur
+const cols = Math.ceil(window.innerWidth / 120);
+const rows = Math.ceil(window.innerHeight / 120);
+
+for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+        const gif = document.createElement('img');
+        gif.src = 'https://i.giphy.com/media/vFKqnCdLPNOKc/giphy.webp';
+        gif.style.position = 'absolute';
+        gif.style.left = `${x*120}px`;
+        gif.style.top = `${y*120}px`;
+        gif.style.animationDuration = (8 + Math.random()*5) + 's';
+        backgroundGifs.appendChild(gif);
+    }
+}
+
+// "Hayır" butonuna tıklama
+noBtn.addEventListener("click", function() {
+    noClickCount++;
+    if (noClickCount === 10) {
+        buttons.style.display = 'none';
+        fifthClickMessage.style.display = 'block';
+    }
+    const currentFontSize = parseInt(window.getComputedStyle(yesBtn).fontSize);
+    yesBtn.style.fontSize = (currentFontSize + 5) + "px";
+    buttons.style.flexDirection = buttons.style.flexDirection === 'row-reverse' ? 'row' : 'row-reverse';
+});
+
+// "Evet" butonuna tıklama
+yesBtn.addEventListener("click", function() {
+    document.querySelector('.container').innerHTML = `
+        <div style="padding: 20px;">
+            <h1>Sen ol ben olmicam 💖</h1>
+            <p style="margin: 20px 0; font-size: 1.2rem;">Antibiyotik görüldü</p>
+        </div>
+    `;
+});
+</script>
+
+</body>
+</html>
