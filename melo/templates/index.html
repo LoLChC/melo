@@ -28,6 +28,42 @@ body {
     color: var(--text-color);
 }
 
+/* Popup */
+.popup {
+    position: fixed;
+    top: -150px; /* başta görünmez */
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    color: var(--text-color);
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    font-size: 1.2rem;
+    font-weight: bold;
+    z-index: 1000;
+    animation: slideDown 0.8s forwards;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Popup kapatma butonu */
+.popup button {
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+@keyframes slideDown {
+    to { top: 20px; }
+}
+
 /* Arka plan GIF container */
 .background-gifs {
     position: fixed;
@@ -110,6 +146,12 @@ button {
 </head>
 <body>
 
+<!-- Popup -->
+<div class="popup" id="popup">
+    💌 Hoş geldin! Önce bunu görmen lazım.
+    <button onclick="closePopup()">Kapat</button>
+</div>
+
 <!-- Arka plan GIF'ler -->
 <div class="background-gifs" id="backgroundGifs"></div>
 
@@ -134,6 +176,11 @@ const buttons = document.getElementById('buttons');
 const fifthClickMessage = document.getElementById('fifthClickMessage');
 const backgroundGifs = document.getElementById('backgroundGifs');
 let noClickCount = 0;
+
+// Popup kapatma
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
 
 // Arka plan GIF’leri doldur
 const cols = Math.ceil(window.innerWidth / 120);
